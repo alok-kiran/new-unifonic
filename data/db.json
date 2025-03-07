@@ -1,0 +1,186 @@
+[
+  {
+    "name": "sandbox_image_message",
+    "components": [
+      {
+        "type": "HEADER",
+        "format": "IMAGE",
+        "example": {
+          "header_handle": [
+            "https://scontent.whatsapp.net/v/t61.29466-34/473399063_3147537022088627_7736183374451878278_n.png?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=FiyuPS4ukKEQ7kNvgEgFkn7&_nc_oc=AdgwUW8dP1z7tfJT60nnqt77rwigJCKx7lzKY8gb5n6jCjbPXHRy-7ScSHCQO3iPENU&_nc_zt=3&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=AeT0EfVGCMrqjlrSHmeQ20h&oh=01_Q5AaIDOvZbaw81tUtGSnBYeCYgIkdwZWPwhEQgsWcma2P6Wh&oe=67F10108"
+          ]
+        }
+      },
+      {
+        "type": "BODY",
+        "text": "🎉 Seasonal Savings Are Here! 🛍️❄️\n\nThe season of shopping just got better! Enjoy exclusive discounts on your favourite items for a limited time. Don’t miss out on the season's best deals—shop now and save big! 🎁✨\n\n🛒 Hurry! Offer ends soon! 🔥"
+      },
+      {
+        "type": "FOOTER",
+        "text": "Test message from Unifonic, not intended for commercial use"
+      }
+    ],
+    "language": "en",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "id": "3147537018755294"
+  },
+  {
+    "name": "youss_textheader",
+    "components": [
+      {
+        "type": "HEADER",
+        "format": "TEXT",
+        "text": "Dear{{1}},",
+        "example": {
+          "header_text": [
+            "youstina"
+          ]
+        }
+      },
+      {
+        "type": "BODY",
+        "text": "Welcome to Unifonic."
+      }
+    ],
+    "language": "en",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "id": "1524230404920822"
+  },
+  {
+    "name": "almiswak_test_carousel",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "تألقي بنضارة بشرتك✨\n مع عروض مجموعة #المسواك الطبية 💚\n بمناسبة قرب حلول شهر رمضان 🌙🤩"
+      },
+      {
+        "type": "CAROUSEL",
+        "cards": [
+          {
+            "components": [
+              {
+                "type": "HEADER",
+                "format": "IMAGE",
+                "example": {
+                  "header_handle": [
+                    "https://scontent.whatsapp.net/v/t61.29466-34/473402066_955074113480842_96820296393401949_n.jpg?ccb=1-7&_nc_sid=a80384&_nc_ohc=er4agFLH4hUQ7kNvgG6JCSk&_nc_oc=AdjMnWDf6d_OFAdrfahvEtGo81M7KNrvZLGnhyn0kqVMFFBGk6UzK8P68npVRrdMUkc&_nc_zt=3&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=AeT0EfVGCMrqjlrSHmeQ20h&oh=01_Q5AaIL7mQU4NTUL4GHk0xG8LvygJSHyMUBYh83ERF556qfOI&oe=67F0F884"
+                  ]
+                }
+              },
+              {
+                "type": "BODY",
+                "text": "احصلي على ترطيب مثالي مع ابر النضارة.🤩\nزوري المسواك لتكتشفي كيفية الحصول على بشرة ناعمة وصحية. 👩🏻\nاحجزي موعدك الآن!"
+              },
+              {
+                "type": "BUTTONS",
+                "buttons": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "تصفحي القائمة الرئيسية"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "type": "HEADER",
+                "format": "IMAGE",
+                "example": {
+                  "header_handle": [
+                    "https://scontent.whatsapp.net/v/t61.29466-34/473408333_514598415016784_5462477783336507216_n.jpg?ccb=1-7&_nc_sid=a80384&_nc_ohc=lH5LYcg4dr0Q7kNvgFXzNpV&_nc_oc=AdjheE4xfHMovBGBfkGP51FFjWpx7zJ_ru3lm2Rzg-uCk3LAbLCb6QHQ4eiNU2g52Lo&_nc_zt=3&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=AeT0EfVGCMrqjlrSHmeQ20h&oh=01_Q5AaIEtE5HeF7-XOpGRkbJe1fFLEMV5CCVu7tQafa_AD0yYe&oe=67F0F48E"
+                  ]
+                }
+              },
+              {
+                "type": "BODY",
+                "text": "توقف عن العبث، وابدأ العلاج! عالج حب الشباب بعناية،\n لأن بشرتك تستحق الأفضل! 😎"
+              },
+              {
+                "type": "BUTTONS",
+                "buttons": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "تصفح القائمة الرئيسية"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "type": "HEADER",
+                "format": "IMAGE",
+                "example": {
+                  "header_handle": [
+                    "https://scontent.whatsapp.net/v/t61.29466-34/473395103_940563788131558_6480483919877454637_n.jpg?ccb=1-7&_nc_sid=a80384&_nc_ohc=cTlfN3fr6GUQ7kNvgH64QFc&_nc_oc=AdiRLKSGPlJ129ZVrAQeXZY-AFklTk2tP_A1WmvbgTzAex2SUGh89rRrMUTmduDb7Ho&_nc_zt=3&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=AeT0EfVGCMrqjlrSHmeQ20h&oh=01_Q5AaIO2COAGXSCDfQ7VLCqxFXu_LFURK5lbfaAiKMjEEpEDL&oe=67F0EEDB"
+                  ]
+                }
+              },
+              {
+                "type": "BODY",
+                "text": "الابتسامة المثالية تبدأ بالعناية.🦷\n اجعل اليوم بداية رحلتك نحو ابتسامة أحلامك 🤩\n واحجز موعدك الآن!"
+              },
+              {
+                "type": "BUTTONS",
+                "buttons": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "تصفحي القائمة الرئيسية"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "language": "ar",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "id": "1524587311566231"
+  },
+  {
+    "name": "mj_demo_123",
+    "components": [
+      {
+        "type": "HEADER",
+        "format": "TEXT",
+        "text": "Unifonic"
+      },
+      {
+        "type": "BODY",
+        "text": "Hi {{1}},\n\nWelcome to *Unifonic*.",
+        "example": {
+          "body_text": [
+            [
+              "Mohammed"
+            ]
+          ]
+        }
+      },
+      {
+        "type": "FOOTER",
+        "text": "Unifonic"
+      },
+      {
+        "type": "BUTTONS",
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "Visit our website",
+            "url": "https://www.unifonic.com/en/"
+          }
+        ]
+      }
+    ],
+    "language": "en",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "id": "1429451388028411"
+  }
+]
