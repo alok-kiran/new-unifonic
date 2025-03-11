@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { MessageSquare, Image, FileText, Link, Phone, AlertCircle } from "lucide-react";
+import { MessageSquare, FileText, Link, Phone, AlertCircle } from "lucide-react";
+import Image from "next/image";
 
 interface TemplatePreviewProps {
   template: WhatsAppTemplate | null;
@@ -23,6 +24,7 @@ interface TemplatePreviewProps {
 export function TemplatePreview({ template, variables, onVariableChange }: TemplatePreviewProps) {
   // Track if variables have been filled
   const [missingVariables, setMissingVariables] = useState<string[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string>("https://animalfactguide.com/wp-content/uploads/2022/03/koala_iStock-140396797-scaled.jpg");
 
   // Check for missing variables when variables change
   useEffect(() => {
@@ -33,6 +35,8 @@ export function TemplatePreview({ template, variables, onVariableChange }: Templ
       setMissingVariables([]);
     }
   }, [variables]);
+
+  console.log(['template', template]);
 
   if (!template) {
     return (
@@ -76,10 +80,20 @@ export function TemplatePreview({ template, variables, onVariableChange }: Templ
               {headerComponent && (
                 <div className="rounded-lg overflow-hidden border">
                   {headerComponent.format === "IMAGE" && headerComponent.example?.header_handle && (
-                    <div className="relative aspect-video bg-muted flex items-center justify-center">
-                      <Image className="h-8 w-8 text-muted-foreground" />
-                      <span className="text-xs text-muted-foreground absolute bottom-2 right-2">Image Header</span>
-                    </div>
+                    <>
+                      <div className="relative aspect-video bg-muted flex items-center justify-center">
+                        <Image src={selectedImage} alt="Header Image" layout="fill" objectFit="cover" />
+                        <span className="text-xs text-muted-foreground absolute bottom-2 right-2">Image Header</span>
+                      </div>
+                      <select
+                        className="mt-2 p-2 border rounded"
+                        value={selectedImage}
+                        onChange={(e) => setSelectedImage(e.target.value)}
+                      >
+                        <option value="https://animalfactguide.com/wp-content/uploads/2022/03/koala_iStock-140396797-scaled.jpg">Image 1</option>
+                        <option value="https://aloks994.wpcomstaging.com/wp-content/uploads/2025/03/news.png">Image 2</option>
+                      </select>
+                    </>
                   )}
                   {headerComponent.format === "DOCUMENT" && headerComponent.example?.header_handle && (
                     <div className="relative aspect-[4/3] bg-muted flex items-center justify-center">
