@@ -171,6 +171,7 @@ export function formatTemplatePreview(text: string, variables: TemplateVariable[
   return formattedText;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatBody = (userData: UserData, template: any) => {
   if (!template) {
     throw new Error("Template is required");
@@ -180,7 +181,7 @@ export const formatBody = (userData: UserData, template: any) => {
   const bodyTextVariables = body.example?.body_text?.[0] || [];
   const bodyTextArray = Object.keys(userData.Data || {})
     .filter(key => key.includes("body_text"))
-    .map(key => userData.Data![key]);
+    .map(key => (userData.Data as Record<string, string | undefined>)[key]);
 
   if (bodyTextVariables?.length > 0) {
     return {
@@ -196,6 +197,7 @@ export const formatBody = (userData: UserData, template: any) => {
   return null;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const formatHeader = (userData: UserData, template: any) => {
   if (!template) {
     throw new Error("Template is required");
@@ -271,6 +273,7 @@ const formatHeader = (userData: UserData, template: any) => {
   return null;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatTemplateRequest = (template: any, user: UserData) => {
   const components = [];
   const headerComponent = formatHeader(user, template);
