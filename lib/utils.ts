@@ -110,7 +110,16 @@ interface UserData {
     header_text2?: string;
     header_image?: string;
     header_document?: string;
+    headerLatitude?: string;
+    headerLongitude?: string;
+    headerAddressName?: string;
+    headerAddress?: string;
+
   };
+}
+interface Component {
+  type: string;
+  parameters: { type: string; url?: string; text?: string }[];
 }
 
 // Extract variables from template text
@@ -162,48 +171,115 @@ export function formatTemplatePreview(text: string, variables: TemplateVariable[
   return formattedText;
 }
 
+export const formatBody = (userData: UserData, template: any) => {
+  if (!template) {
+    throw new Error("Template is required");
+  }
+  const body = template.components?.find((component: Component) => component.type === 'BODY');
+  if (!body) return null;
+  const bodyTextVariables = body.example?.body_text?.[0] || [];
+  const bodyTextArray = Object.keys(userData.Data || {})
+    .filter(key => key.includes("body_text"))
+    .map(key => userData.Data![key]);
+
+  if (bodyTextVariables?.length > 0) {
+    return {
+      "type": "body",
+      "parameters": bodyTextVariables.map((variable: string, index: number) => {
+        return {
+          "type": "text",
+          "text": bodyTextArray?.[index] || variable
+        };
+      })
+    };
+  }
+  return null;
+}
+
 const formatHeader = (userData: UserData, template: any) => {
-  const header = template.components.find((component: any) => component.type === 'HEADER');
+  if (!template) {
+    throw new Error("Template is required");
+  }
+  const header = template.components.find((component: Component) => component.type === 'HEADER');
   if (!header) return null;
-  const { header_image } = userData.Data || {};
+  const { header_image, header_document, headerLatitude, headerLongitude, headerAddressName, headerAddress } = userData.Data || {};
+  const headerTextVariables = header.example?.header_text || [];
   const headerTextArray = Object.keys(userData.Data || {})
     .filter(key => key.includes("header_text"))
-    .map(key => userData.Data![key]);
+    .map(key => (userData.Data as Record<string, string | undefined>)[key]);
   const type = header?.format || 'TEXT';
 
   switch (type) {
     case 'IMAGE':
-      if (header_image) {
+      if (header.example?.header_handle?.length > 0) {
         return {
           "type": "header",
           "parameters": [
             {
               "type": "image",
-              "url": header_image
+              "url": header_image ? header_image : header.example.header_handle[0]
             }
           ]
         };
       }
       break;
     case 'TEXT':
-      if (headerTextArray) {
+      if (headerTextVariables?.length > 0) {
         return {
           "type": "header",
-          "parameters": headerTextArray.map((variable) => {
+          "parameters": headerTextVariables.map((variable: string, index: number) => {
             return {
               "type": "text",
-              "text": variable
+              "text": headerTextArray?.[index] || variable
             };
           })
         };
       }
+    case 'DOCUMENT':
+      if (header.example?.header_handle?.length > 0) {
+        return {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "file",
+              "fileName": "document.pdf",
+              "url": header_document ? header_document : header.example.header_handle[0]
+            }
+          ]
+        };
+      }
       break;
+    case 'LOCATION':
+      if (headerLatitude && headerLongitude) {
+        return {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "location",
+              "latitude": parseFloat(headerLatitude),
+              "longitude": parseFloat(headerLongitude),
+              "address": headerAddress,
+              "name": headerAddressName
+            }
+          ]
+        };
+      }
+
     default:
       return null;
   }
   return null;
 }
 
-export const formatTemplateRequest = (template: any, memberData: any) => {
-  return formatHeader(memberData, template);
+export const formatTemplateRequest = (template: any, user: UserData) => {
+  const components = [];
+  const headerComponent = formatHeader(user, template);
+  const bodyComponent = formatBody(user, template);
+  if (headerComponent) {
+    components.push(headerComponent);
+  }
+  if (bodyComponent) {
+    components.push(bodyComponent);
+  }
+  return components;
 };

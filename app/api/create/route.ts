@@ -29,7 +29,6 @@ const getTemplateByNameAndLanguage = async ({ name, language }: { name: string, 
 
 export async function POST(req: Request,) {
     const body = await req.json();
-    console.log(['body', body]);
     const template = await getTemplateByNameAndLanguage({ name: body.Data.templateName, language: body.Data.language });
     const components = formatTemplateRequest(template[0], body);
     const messageBody = {
@@ -47,7 +46,7 @@ export async function POST(req: Request,) {
         }
     }
     if (components) {
-        messageBody.content.components.push(components);
+        messageBody.content.components = components;
     }
     const config = {
         method: 'post',
