@@ -286,3 +286,13 @@ export const formatTemplateRequest = (template: any, user: UserData) => {
   }
   return components;
 };
+
+export const formatPhoneNumber = (countryCode: string, phoneNumber: string) => {
+  if (!phoneNumber || !countryCode) {
+    return null
+  }
+  if (phoneNumber.startsWith('0')) {
+    return phoneNumber.replace('0', `+${countryCode}`);
+  }
+  return `+${phoneNumber}`;
+}

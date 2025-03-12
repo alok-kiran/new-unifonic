@@ -1,4 +1,4 @@
-import { formatTemplateRequest } from '@/lib/utils';
+import { formatPhoneNumber, formatTemplateRequest } from '@/lib/utils';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 interface Component {
@@ -29,18 +29,30 @@ const getTemplateByNameAndLanguage = async ({ name, language }: { name: string, 
 
 export async function POST(req: Request,) {
     const body = await req.json();
-    const template = await getTemplateByNameAndLanguage({ name: body.Data.templateName, language: body.Data.language });
+    const templateName = req.headers.get('templatename');
+    const language = req.headers.get('language');
+    const countryCode = req.headers.get('countrycode');
+    console.log(['header', templateName, language, countryCode]);
+    if (!templateName || !language || !countryCode) {
+        return NextResponse.json({ created: false, error: 'missing templateName , language, countrycode' }, { status: 400 });
+    }
+    const userContact = formatPhoneNumber(countryCode, body.Data?.Membership?.PhoneNumber);
+    console.log(['userContact', userContact]);
+    if (!userContact) {
+        return NextResponse.json({ created: false, error: 'invalid phone number' }, { status: 400 });
+    }
+    const template = await getTemplateByNameAndLanguage({ name: templateName, language: language });
     const components = formatTemplateRequest(template[0], body);
     const messageBody = {
         "recipient": {
-            "contact": `+${body.Data?.Membership?.PhoneNumber}`,
+            "contact": userContact,
             "channel": "whatsapp"
         },
         "content": {
             "type": "template",
-            "name": body.Data.templateName,
+            "name": templateName,
             "language": {
-                "code": body.Data.language
+                "code": language
             },
             "components": [] as Component[]
         }
